@@ -12,6 +12,12 @@ import { LocalStorageRepository } from './localstorage.repository';
 let directorsKey = 'localStorageRepository_directors';
 
 
+interface BlockbusterDTO {
+  movieName: string;
+  release: number;
+}
+
+
 interface DirectorDTO {
   name: string;
   sex: string;
@@ -19,7 +25,7 @@ interface DirectorDTO {
   city: string;
   dob: number;
   age: number | string;
-  blockbuster: string;
+  blockbusters: BlockbusterDTO[];
 }
 
 
@@ -36,7 +42,7 @@ export class DirectorRepositoryLocalStorage extends LocalStorageRepository
                                  dto.city,
                                  dto.dob,
                                  dto.age,
-                                 [new Blockbuster(dto.blockbuster, 1999)]))
+                                 toBlockbusters(dto.blockbusters)))
     );
   }
 
@@ -50,15 +56,15 @@ export class DirectorRepositoryLocalStorage extends LocalStorageRepository
                             dto.city,
                             dto.dob,
                             dto.age,
-                            [new Blockbuster(dto.blockbuster, 1999)]));
+                            toBlockbusters(dto.blockbusters)));
   }
 
   store(director: Director): Promise<void> {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       let directorDTOs = this.getItem<DirectorDTO[]>(directorsKey);
       let index = directorDTOs.findIndex(d => d.name == director.fullName);
       if (index >= 0) {
-        directorDTOs[index] = this.toDTO(director);
+        directorDTOs[index] = directorToDTO(director);
         this.setItem(directorsKey, directorDTOs);
         resolve();
       } else {
@@ -67,16 +73,30 @@ export class DirectorRepositoryLocalStorage extends LocalStorageRepository
     });
   }
 
-  private toDTO(director: Director): any {
-    return {
-      name: director.fullName,
-      sex: director.sex,
-      nationality: director.nationality,
-      city: director.city,
-      dob: director.dob,
-      age: director.age,
-      blockbuster: director.blockbusters[0]
-    };
-  }
+}
 
+
+function directorToDTO(director: Director): DirectorDTO {
+  return {
+    name: director.fullName,
+    sex: director.sex,
+    nationality: director.nationality,
+    city: director.city,
+    dob: director.dob,
+    age: director.age,
+    blockbusters: blockbustersToDTOs(director.blockbusters)
+  };
+}
+
+
+function blockbustersToDTOs(blockbusters: Blockbuster[]): BlockbusterDTO[] {
+  return blockbusters.map(b => ({
+    movieName: b.movieName,
+    release: b.release
+  }));
+}
+
+
+function toBlockbusters(blockbusterDTOs: BlockbusterDTO[]): Blockbuster[] {
+  return blockbusterDTOs.map(b => new Blockbuster(b.movieName, b.release));
 }

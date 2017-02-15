@@ -6,7 +6,7 @@ export const directorDTOs = [
     "city": "Almería",
     "dob": -639535067,
     "age": 66,
-    "blockbuster": "Todo sobre mi madre"
+    "blockbusters": [{"movieName": "Todo sobre mi madre", "release": 1900}]
   },
   {
     "name": "Giuseppe Tornatore",
@@ -15,7 +15,7 @@ export const directorDTOs = [
     "city": "Bagheria",
     "dob": -429064667,
     "age": 59,
-    "blockbuster": "Cinema paradiso"
+    "blockbusters": [{"movieName": "Cinema paradiso", "release": 1900}]
   },
   {
     "name": "Sofia Coppola",
@@ -24,7 +24,7 @@ export const directorDTOs = [
     "city": "New York",
     "dob": 43111333,
     "age": 44,
-    "blockbuster": "Lost in translation"
+    "blockbusters": [{"movieName": "Lost in translation", "release": 1900}]
   },
   {
     "name": "Luc Besson",
@@ -33,7 +33,7 @@ export const directorDTOs = [
     "city": "Paris",
     "dob": -340504667,
     "age": 59,
-    "blockbuster": "Léon"
+    "blockbusters": [{"movieName": "Léon", "release": 1900}]
   },
   {
     "name": "Alfred Hitchcock",
@@ -42,7 +42,7 @@ export const directorDTOs = [
     "city": "London",
     "dob": -2221087067,
     "age": "dead",
-    "blockbuster": "Psicosis"
+    "blockbusters": [{"movieName": "Psicosis", "release": 1900}]
   },
   {
     "name": "Lucía Puenzo",
@@ -51,7 +51,7 @@ export const directorDTOs = [
     "city": "Buenos Aires",
     "dob": 218071333,
     "age": 38,
-    "blockbuster": "Wakolda"
+    "blockbusters": [{"movieName": "Wakolda", "release": 1900}]
   },
   {
     "name": "Alejandro González Iñárritu",
@@ -60,7 +60,7 @@ export const directorDTOs = [
     "city": "Mexico DF",
     "dob": -201314267,
     "age": 52,
-    "blockbuster": "Birdman"
+    "blockbusters": [{"movieName": "Birdman", "release": 1900}]
   }
 ]
 
